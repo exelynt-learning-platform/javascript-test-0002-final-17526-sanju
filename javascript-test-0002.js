@@ -1,31 +1,30 @@
-let n = 6;
+const ROWS = 5;
 
-for (let i = 0; i < n; i++) {
+// function to calculate nCr
+function nCr(n, r) {
+    let res = 1;
 
-    let row = "";
-
-   
-    for (let j = 0; j < i; j++) {
-        row += " ";
+    for (let i = 0; i < r; i++) {
+        res = res * (n - i) / (i + 1);
     }
 
- 
-    row += "1 ";
+    return Math.round(res);
+}
 
+// print rows
+for (let i = ROWS - 1; i >= 0; i--) {
 
-    for (let j = n - 1 - i; j > 1; j--) {
-        row += j + " ";
+    let line = "";
+
+    // spaces
+    for (let s = 0; s < ROWS - i - 1; s++) {
+        line += " ";
     }
 
-   
-    for (let j = 2; j <= n - 1 - i; j++) {
-        row += j + " ";
+    // Pascal triangle values
+    for (let j = 0; j <= i; j++) {
+        line += nCr(i, j) + " ";
     }
 
-
-    if (n - i > 1) {
-        row += "1";
-    }
-
-    console.log(row);
+    console.log(line.trim());
 }
